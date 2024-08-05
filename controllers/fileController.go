@@ -57,3 +57,47 @@ func (controller *FileController) FindAllFiles(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, response)
 }
+
+func (controller *FileController) DeleteFile(ctx *gin.Context) {
+	bucket := ctx.Param("bucket")
+	path := helpers.TrimmedString(ctx.Param("path"))
+	idFile := ctx.PostForm("id")
+
+	_, err := controller.bucketRepository.FindBucketByName(bucket)
+	if err != nil {
+		helpers.ErrorNotFound(ctx, err, "Bucket not found")
+		return
+	}
+
+	_, err = controller.pathRepository.FindPathIDByBucketName(bucket, path)
+	if err != nil {
+		helpers.ErrorNotFound(ctx, err, "Path not found")
+		return
+	}
+
+	file, err := controller.fileRepository.FindFileByID(idFile)
+	if err != nil {
+		helpers.ErrorNotFound(ctx, err, "File not found")
+		return
+	}
+
+	file.Show = false
+
+	_, err = controller.fileRepository.HideFileByID(file)
+
+	if err != nil {
+		helpers.ErrorResponse(ctx, err, "Tidak bisa menghapus file")
+		return
+	}
+
+	response := data.ResponseModel{
+		Response:   http.StatusOK,
+		Error:      "",
+		AppID:      "skincare-server",
+		Controller: "file",
+		Action:     "GetListFile",
+		Result:     "success delete file",
+	}
+
+	ctx.JSON(http.StatusOK, response)
+}

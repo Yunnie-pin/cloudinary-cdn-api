@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "6e30f8b4-7db7-453e-b4db-a8fe6d0bc224",
+		"name": "CDN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32381739",
+		"_collection_link": "https://winter-shadow-290463.postman.co/workspace/My-Workspace~0ba035d3-2b9e-4699-86b2-fb75b219dfcf/collection/32381739-6e30f8b4-7db7-453e-b4db-a8fe6d0bc224?action=share&source=collection_link&creator=32381739"
+	},
+	"item": [
+		{
+			"name": "Files",
+			"item": [
+				{
+					"name": "Get List Bucket",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "MySup3rS3cr3t",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_cdn}}/api/buckets",
+							"host": [
+								"{{url_cdn}}"
+							],
+							"path": [
+								"api",
+								"buckets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Files",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "MySup3rS3cr3t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url_cdn}}/api/files/skincare-telto/photo",
+							"host": [
+								"{{url_cdn}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"skincare-telto",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Files",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "MySup3rS3cr3t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "3103134d-250a-41a3-a5ef-60ed3b4a1ccb",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_cdn}}/api/files/skincare-telto/photo",
+							"host": [
+								"{{url_cdn}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"skincare-telto",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Uploader",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "MySup3rS3cr3t",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "bucket",
+							"value": "skincare-telto",
+							"type": "text"
+						},
+						{
+							"key": "path",
+							"value": "photo",
+							"type": "text"
+						},
+						{
+							"key": "files[]",
+							"type": "file",
+							"src": [
+								"/C:/Users/lenovo/Downloads/87435b55-26ed-4610-a114-20ac052b5d74.jpg",
+								"/C:/Users/lenovo/Downloads/451818555_122113549142372637_4831574009677418453_n.jpg"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url_cdn}}/api/uploader",
+					"host": [
+						"{{url_cdn}}"
+					],
+					"path": [
+						"api",
+						"uploader"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

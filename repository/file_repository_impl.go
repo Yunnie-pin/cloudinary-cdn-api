@@ -23,7 +23,7 @@ func (f *FileRepositoryImpl) Save(file *models.File) (*models.File, error) {
 
 func (f *FileRepositoryImpl) FindAllByPathID(pathID string) (*[]models.FileResUpload, error) {
 	var files []models.File
-	if err := f.Db.Where("path_id = ?", pathID).Order("created_at desc").Find(&files).Error; err != nil {
+	if err := f.Db.Where("path_id = ?", pathID).Where("show = ?", true).Order("created_at desc").Find(&files).Error; err != nil {
 		return nil, err
 	}
 
@@ -37,4 +37,20 @@ func (f *FileRepositoryImpl) FindAllByPathID(pathID string) (*[]models.FileResUp
 		})
 	}
 	return &filesRes, nil
+}
+
+func (f *FileRepositoryImpl) FindFileByID(fileID string) (*models.File, error) {
+	var file models.File
+	if err := f.Db.Where("id = ?", fileID).First(&file).Error; err != nil {
+		return nil, err
+	}
+
+	return &file, nil
+}
+
+func (f *FileRepositoryImpl) HideFileByID(file *models.File) (*models.File, error) {
+	if err := f.Db.Model(&file).Update("show", false).Error; err != nil {
+		return nil, err
+	}
+	return file, nil
 }

@@ -37,6 +37,7 @@ func NewRouter(
 		filesRouter := apiRouter.Group("/files")
 		{
 			filesRouter.GET("/:bucket/*path", fileController.FindAllFiles)
+			filesRouter.DELETE("/:bucket/*path", fileController.DeleteFile)
 		}
 
 	}
