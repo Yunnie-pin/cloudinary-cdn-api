@@ -19,6 +19,8 @@ type Config struct {
 	DBName     string
 	DBPort     string
 	DBURL      string
+
+	SecretAuth string
 }
 
 func LoadConfig() (config Config, err error) {
@@ -36,6 +38,7 @@ func LoadConfig() (config Config, err error) {
 		DBName:       os.Getenv("DB_NAME"),
 		DBPort:       os.Getenv("DB_PORT"),
 		DBURL:        os.Getenv("DB_URL"),
+		SecretAuth:   os.Getenv("SECRET_AUTH"),
 	}
 
 	return config, err
