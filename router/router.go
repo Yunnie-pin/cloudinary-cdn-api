@@ -9,6 +9,8 @@ import (
 
 func NewRouter(
 	bucketController *controllers.BucketController,
+	fileController *controllers.FileController,
+	uploaderController *controllers.UploaderController,
 ) *gin.Engine {
 	r := gin.Default()
 	r.LoadHTMLFiles("view/index.html")
@@ -24,11 +26,8 @@ func NewRouter(
 	apiRouter := r.Group("/api")
 	{
 		apiRouter.Use(middlewares.SimpleAuth())
-		apiRouter.POST("/uploader", func(ctx *gin.Context) {
-			ctx.JSON(200, gin.H{
-				"message": "success",
-			})
-		})
+
+		apiRouter.POST("/uploader", uploaderController.UploadFile)
 
 		bucketRouter := apiRouter.Group("/buckets")
 		{
@@ -37,16 +36,7 @@ func NewRouter(
 
 		filesRouter := apiRouter.Group("/files")
 		{
-			filesRouter.GET("/:bucket/*path", func(c *gin.Context) {
-				bucket := c.Param("bucket")
-				path := c.Param("path")
-
-				c.JSON(200, gin.H{
-					"message": "success",
-					"bucket":  bucket,
-					"path":    path,
-				})
-			})
+			filesRouter.GET("/:bucket/*path", fileController.FindAllFiles)
 		}
 
 	}

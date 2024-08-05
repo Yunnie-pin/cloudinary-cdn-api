@@ -22,14 +22,12 @@ func MigrationDB(db *gorm.DB) (err error) {
 }
 
 func SendSeeder(db *gorm.DB) (err error) {
-	uidBucket := []uuid.UUID{
-		uuid.New(),
-	}
-
 	bucket := []models.Bucket{
 		{
-			ID:   uidBucket[0],
 			Name: "gulagulali",
+		},
+		{
+			Name: "skincare-telto",
 		},
 	}
 
@@ -37,9 +35,14 @@ func SendSeeder(db *gorm.DB) (err error) {
 
 	path := []models.Path{
 		{
-			ID:       uuid.New(),
-			Name:     "photo",
-			BucketID: string(uidBucket[0].String()),
+			ID:         uuid.New(),
+			Name:       "photo",
+			BucketName: "gulagulali",
+		},
+		{
+			ID:         uuid.New(),
+			Name:       "photo",
+			BucketName: "skincare-telto",
 		},
 	}
 

@@ -19,6 +19,11 @@ func main() {
 		log.Fatalf("🧊 Tidak bisa terhubung ke database.")
 	}
 
+	cld, err := config.ConnectCld(&loadConfig)
+	if err != nil {
+		log.Fatalf("🧊 Tidak bisa terhubung ke cloudinary.")
+	}
+
 	// Definisikan flag --migrate
 	input := flag.Bool("migrate", false, "Run migration scripts")
 
@@ -35,12 +40,29 @@ func main() {
 
 	//init repository
 	bucketRepository := repository.NewBucketRepository(db)
+	pathRepository := repository.NewPathRepository(db)
+	fileRepository := repository.NewFileRepository(db)
+	cloudinaryRepository := repository.NewCloudinaryRepository(cld)
 
 	//init controller
 	bucketController := controllers.NewBucketController(bucketRepository)
+	fileController := controllers.NewFileController(
+		bucketRepository,
+		pathRepository,
+		fileRepository,
+	)
+	uploaderController := controllers.NewUploaderController(
+		bucketRepository,
+		pathRepository,
+		fileRepository,
+		cloudinaryRepository,
+	)
+
 	//init router
 	r := router.NewRouter(
 		bucketController,
+		fileController,
+		uploaderController,
 	)
 
 	log.Println("🧊 ENV: ", loadConfig.ENV)

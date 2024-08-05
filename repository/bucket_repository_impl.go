@@ -21,3 +21,12 @@ func (b *BucketRepositoryImpl) FindAll() (*[]models.Bucket, error) {
 	}
 	return &buckets, nil
 }
+
+
+func (b *BucketRepositoryImpl) FindBucketByName(bucketName string) (*models.Bucket, error) {
+	var bucket models.Bucket
+	if err := b.Db.Preload("Paths").Where("name = ?", bucketName).First(&bucket).Error; err != nil {
+		return nil, err
+	}
+	return &bucket, nil
+}

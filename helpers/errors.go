@@ -59,3 +59,14 @@ func ErrorBinding(ctx *gin.Context, err error, statusCode int, msg string) {
 		Result:     nil,
 	})
 }
+
+func ErrorNotFound(ctx *gin.Context, err error, msg string) {
+	ctx.JSON(http.StatusNotFound, data.ResponseModel{
+		Response:   http.StatusNotFound,
+		Error:      msg,
+		AppID:      "skincare-server",
+		Controller: "-",
+		Action:     "-",
+		Result:     err,
+	})
+}
