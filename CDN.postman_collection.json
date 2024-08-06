@@ -35,6 +35,79 @@
 					"response": []
 				},
 				{
+					"name": "Create Bucket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "MySup3rS3cr3t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Vtube3.1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_cdn}}/api/buckets",
+							"host": [
+								"{{url_cdn}}"
+							],
+							"path": [
+								"api",
+								"buckets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Path",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "MySup3rS3cr3t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "bucket",
+									"value": "gulagulali",
+									"type": "text"
+								},
+								{
+									"key": "path",
+									"value": "foto-profile",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_cdn}}/api/path",
+							"host": [
+								"{{url_cdn}}"
+							],
+							"path": [
+								"api",
+								"path"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get List Files",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -62,45 +135,6 @@
 								"files",
 								"skincare-telto",
 								"photo"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Path",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "MySup3rS3cr3t",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "bucket",
-									"value": "gulagulali",
-									"type": "text"
-								},
-								{
-									"key": "path",
-									"value": "video",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url_cdn}}/api/path",
-							"host": [
-								"{{url_cdn}}"
-							],
-							"path": [
-								"api",
-								"path"
 							]
 						}
 					},

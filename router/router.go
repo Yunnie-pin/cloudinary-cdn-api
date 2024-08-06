@@ -33,6 +33,7 @@ func NewRouter(
 		bucketRouter := apiRouter.Group("/buckets")
 		{
 			bucketRouter.GET("/", bucketController.FindAll)
+			bucketRouter.POST("/", bucketController.CreateBucket)
 		}
 
 		pathRouter := apiRouter.Group("/path")

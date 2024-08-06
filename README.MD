@@ -7,20 +7,26 @@ https://github.com/Yunnie-pin/cloudinary-cdn-api
 Cloudinary-API-GO is a simple API that allows users to upload images to Cloudinary and store the image details in a PostgreSQL database. The API is built using Go and the Gin framework. The API also includes authentication.
 
 ## Endpoints
+### Headers
+
+| Key           | Value              |
+| ------------- | ------------------ |
+| Authorization | {{ SECRET_AUTH }}  |
 
 ### Uploader
 
 | Method | Endpoint                   | Description                       |
 | ------ | -------------------------- | --------------------------------- |
-| POST   | `/api/uploader` | Upload an image to Cloudinary     |
+| POST   | `/api/uploader`            | Upload an image to Cloudinary     |
 
 
 ### Files
 
-| Method | Endpoint                     | Description                  |
-| ------ | ---------------------------- | ---------------------------- |
-| GET   | `/api/buckets`            | Get list buckets              |
-| POST    | `/api/path` | Create a new path in a bucket |
+| Method | Endpoint                             | Description                   |
+| ------ | ------------------------------------ | ----------------------------- |
+| GET    | `/api/buckets`                       | Get list buckets              |
+| POST   | `/api/buckets`                       | Create a new bucket           |
+| POST   | `/api/path`                          | Create a new path in a bucket |
 | GET    | `/api/files/{{ bucket }}/{{ path }}` | Get list files in a bucket    |
 | DELETE | `/api/files/{{ bucket }}/{{ path }}` | Delete a file in a bucket     |
 
@@ -75,7 +81,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Support
 
 If you find this project useful, please consider giving it a ⭐️ on [GitHub](https://github.com/Yunnie-pin/cloudinary-cdn-api). Your support is greatly appreciated! 😄
-
-
 
 
