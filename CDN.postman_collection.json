@@ -68,6 +68,45 @@
 					"response": []
 				},
 				{
+					"name": "Create Path",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "MySup3rS3cr3t",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "bucket",
+									"value": "gulagulali",
+									"type": "text"
+								},
+								{
+									"key": "path",
+									"value": "video",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_cdn}}/api/path",
+							"host": [
+								"{{url_cdn}}"
+							],
+							"path": [
+								"api",
+								"path"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete Files",
 					"request": {
 						"method": "DELETE",

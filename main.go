@@ -46,6 +46,10 @@ func main() {
 
 	//init controller
 	bucketController := controllers.NewBucketController(bucketRepository)
+	pathController := controllers.NewPathController(
+		bucketRepository,
+		pathRepository,
+	)
 	fileController := controllers.NewFileController(
 		bucketRepository,
 		pathRepository,
@@ -61,6 +65,7 @@ func main() {
 	//init router
 	r := router.NewRouter(
 		bucketController,
+		pathController,
 		fileController,
 		uploaderController,
 	)

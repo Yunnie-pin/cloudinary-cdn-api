@@ -9,6 +9,7 @@ import (
 
 func NewRouter(
 	bucketController *controllers.BucketController,
+	pathController *controllers.PathController,
 	fileController *controllers.FileController,
 	uploaderController *controllers.UploaderController,
 ) *gin.Engine {
@@ -32,6 +33,11 @@ func NewRouter(
 		bucketRouter := apiRouter.Group("/buckets")
 		{
 			bucketRouter.GET("/", bucketController.FindAll)
+		}
+
+		pathRouter := apiRouter.Group("/path")
+		{
+			pathRouter.POST("/", pathController.CreatePath)
 		}
 
 		filesRouter := apiRouter.Group("/files")

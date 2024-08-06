@@ -21,3 +21,10 @@ func (p *PathRepositoryImpl) FindPathIDByBucketName(bucketName string, pathName 
 	}
 	return string(path.ID.String()), nil
 }
+
+func (p *PathRepositoryImpl) Save(path *models.Path) (*models.Path, error) {
+	if err := p.Db.Create(path).Error; err != nil {
+		return nil, err
+	}
+	return path, nil
+}
