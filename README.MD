@@ -21,8 +21,8 @@ Cloudinary-API-GO is a simple API that allows users to upload images to Cloudina
 | ------ | ---------------------------- | ---------------------------- |
 | GET   | `/api/buckets`            | Get list buckets              |
 | POST    | `/api/path` | Create a new path in a bucket |
-| GET    | `/api/files/{{ bucket_id }}/{{ path }}` | Get list files in a bucket    |
-| DELETE | `/api/files/{{ bucket_id }}/{{ path }}` | Delete a file in a bucket     |
+| GET    | `/api/files/{{ bucket }}/{{ path }}` | Get list files in a bucket    |
+| DELETE | `/api/files/{{ bucket }}/{{ path }}` | Delete a file in a bucket     |
 
 
 ## Access Documentation
