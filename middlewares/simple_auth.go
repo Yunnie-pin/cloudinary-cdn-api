@@ -1,6 +1,7 @@
 package middlewares
 
 import (
+	"encoding/base64"
 	"net/http"
 	"strings"
 
@@ -18,11 +19,13 @@ func SimpleAuth() gin.HandlerFunc {
 		authorizationHeader := ctx.Request.Header.Get("Authorization")
 		fields := strings.Fields(authorizationHeader)
 
-		if len(fields) != 0 && (fields[0] == loadConfig.SecretAuth) {
-			secret = fields[0]
+		if len(fields) != 0 && (fields[0] == "Basic") {
+			decodedByte, _ := base64.StdEncoding.DecodeString(fields[1])
+			decodedString := string(decodedByte)
+			secret = strings.Split(decodedString, ":")[1]
 		}
 
-		if secret == "" {
+		if secret != loadConfig.SecretAuth {
 			ctx.AbortWithStatusJSON(http.StatusUnauthorized, data.ResponseModel{
 				Response:   http.StatusUnauthorized,
 				Error:      "Unauthorized",
