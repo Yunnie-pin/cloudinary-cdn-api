@@ -55,7 +55,7 @@ go mod tidy
 ### Migrasi
 
 ```
-go mod main.go --migrate
+go run main.go --migrate
 ```
 
 #### development

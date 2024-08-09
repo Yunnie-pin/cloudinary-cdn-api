@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "6e30f8b4-7db7-453e-b4db-a8fe6d0bc224",
+		"_postman_id": "87e88423-7232-4c53-ad54-698999776dcb",
 		"name": "CDN",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "32381739",
-		"_collection_link": "https://winter-shadow-290463.postman.co/workspace/My-Workspace~0ba035d3-2b9e-4699-86b2-fb75b219dfcf/collection/32381739-6e30f8b4-7db7-453e-b4db-a8fe6d0bc224?action=share&source=collection_link&creator=32381739"
+		"_exporter_id": "24438129"
 	},
 	"item": [
 		{
@@ -14,13 +13,7 @@
 					"name": "Get List Bucket",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "MySup3rS3cr3t",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "{{url_cdn}}/api/buckets",
 							"host": [
@@ -38,13 +31,7 @@
 					"name": "Create Bucket",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "MySup3rS3cr3t",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -72,13 +59,7 @@
 					"name": "Create Path",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "MySup3rS3cr3t",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -114,27 +95,27 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "MySup3rS3cr3t",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{url_cdn}}/api/files/skincare-telto/photo",
+							"raw": "{{url_cdn}}/api/files/:bucket-name/photo",
 							"host": [
 								"{{url_cdn}}"
 							],
 							"path": [
 								"api",
 								"files",
-								"skincare-telto",
+								":bucket-name",
 								"photo"
+							],
+							"variable": [
+								{
+									"key": "bucket-name",
+									"value": "gulagulali"
+								}
 							]
 						}
 					},
@@ -144,13 +125,7 @@
 					"name": "Delete Files",
 					"request": {
 						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "MySup3rS3cr3t",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -182,13 +157,7 @@
 			"name": "Uploader",
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "MySup3rS3cr3t",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "formdata",
 					"formdata": [
@@ -224,6 +193,55 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{secret}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "secret",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url_cdn",
+			"value": "http://127.0.0.1:3000",
+			"type": "string"
+		},
+		{
+			"key": "secret",
+			"value": "CURUT",
+			"type": "string"
 		}
 	]
 }
