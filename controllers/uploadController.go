@@ -39,6 +39,8 @@ func NewUploaderController(
 }
 
 func (controller *UploaderController) UploadFile(ctx *gin.Context) {
+	const maxFileSize = 10 * 1024 * 1024 // 10MB in bytes
+
 	bucket := ctx.PostForm("bucket")
 	path := ctx.PostForm("path")
 	// Multipart form
@@ -60,8 +62,14 @@ func (controller *UploaderController) UploadFile(ctx *gin.Context) {
 	var urls []string
 
 	for _, file := range files {
+		// validation for file size
+		if file.Size > maxFileSize {
+			helpers.ErrorResponse(ctx, nil, "Some file size exceeds the 10MB limit")
+			return
+		}
+
 		url, err := controller.cloudinaryRepository.SendImage(file, path, ctx)
-		if err != nil {
+		if err != nil || url == "" {
 			helpers.ErrorResponse(ctx, err, "Error when upload file")
 			return
 		}
@@ -92,14 +100,6 @@ func (controller *UploaderController) UploadFile(ctx *gin.Context) {
 			CreatedAt: newFile.CreatedAt,
 		})
 	}
-
-
-	// allFiles, err := controller.fileRepository.FindAllByPathID(pathID)
-
-	// if err != nil {
-	// 	helpers.ErrorResponse(ctx, err, "Error when get all files")
-	// 	return
-	// }
 
 	result := models.ResponseUpload{
 		BucketName: bucket,
