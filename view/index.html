@@ -3,9 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server CDN</title>
+    <title>CDN Cloudinary API</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            width: 80%;
+            margin: auto;
+        }
+
+        .server-stats,
+        .repository,
+        .contributors {
+            border-radius: .25rem;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+
+            h2 {
+                border-bottom: 1px solid #ccc;
+                margin: 0;
+                padding: .5rem;
+            }
+        }
+
+        .server-stats {
+            p {
+                color: red;
+                padding: 1rem;
+                margin: 0;
+                font-weight: bold;
+            }
+        }
+
+        .repository {
+            .wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+                padding: 2rem;
+            }
+            .repository-stats {
+                border: 1px solid #ccc;
+                padding: .5rem 1rem;
+                border-radius: .25rem;
+
+                .star {
+                    display: flex;
+                    align-items: center;
+                    gap: .5rem;
+                    svg {
+                        fill: #f0ad4e;
+                    }
+                }
+            }
+        }
+
+        .contributors {
+            .avatar-container {
+                display: flex;
+                gap: 1rem;
+                place-content: center;
+                padding: 2rem;
+            }
+
+            .avatar {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: .5rem;
+
+                .wrapper {
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 100%;
+                    border: 2px solid #ccc;
+                    overflow: hidden;
+
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+        
+    </style>
 </head>
 <body>
-    Server CDN is <strong style="color: red;"> running...</strong>
+    <div class="container">
+        <div class="server-stats">
+            <h2>Server Status :</h2>
+            <p>Running...</p>
+        </div>
+        <div class="repository">
+            <h2>Repository :</h2>
+            <div class="wrapper">
+                <div class="desc">
+                    <a href="{{ .repo.html_url }}"><h1>{{ .repo.full_name }}</h1></a>
+                    <p>{{ .repo.description }}</p>
+                </div>
+                <div class="repository-stats">
+                    <div class="star">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                        <span>{{ .repo.stargazers_count }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contributors">
+            <h2>Contributors :</h2>
+            <div class="avatar-container">
+                {{ range .contributors }}
+                <div class="avatar">
+                    <div class="wrapper">
+                        <img src="{{ .avatar_url }}" alt="">
+                    </div>
+                    <a href="{{ .html_url }}">@{{ .login }}</a>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+    </div>
 </body>
 </html>
